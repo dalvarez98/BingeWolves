@@ -23,6 +23,7 @@ import exceptions.bingewolves.CharacterNotFoundException;
 import exceptions.bingewolves.MountNotFoundException;
 import exceptions.bingewolves.PetNotFoundException;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import model.bingewolves.ApiAccess;
 /**
  * This program is the controller class and will build the params for a character or pet request and
@@ -32,8 +33,8 @@ import model.bingewolves.ApiAccess;
  */
 public class ApiDataRequest
 {
-	static String params;
-	static String requestUrl;
+	private static String params;
+	private static String requestUrl;
 	private static String apiUrl;
 	//Character Profile
 	private static String name;
@@ -86,8 +87,8 @@ public class ApiDataRequest
 	private static XSSFSheet sheet;
 	private static XSSFRow row;
 	public static Params selectedSearch;
-	private static List<Mount> mountList = new ArrayList();
-	private static List<PetSpeciesDisplay> petList= new ArrayList();
+	public static List<Mount> mountList = new ArrayList();
+	public static List<PetSpeciesDisplay> petList= new ArrayList();
 	static ApiAccess apiRequest = new ApiAccess();
 	
 	public enum Params
@@ -127,8 +128,9 @@ public class ApiDataRequest
 	 * and get the data for the mount.
 	 * 
 	 * @param mountName The name of the mount that will be searched
+	 * @param mountErr The text to be set if the mount does not exist
 	 */
-	public static void mountRequestBuilder(String mountName, Label mountErr) 
+	public static void mountRequestBuilder(String mountName, Text mountErr) 
 	{
 		if (containsMount(mountName))
 		{
@@ -175,8 +177,9 @@ public class ApiDataRequest
 	 * the displayId for the image of the pet.
 	 * 
 	 * @param petName The name of the pet to search
+	 * @param petErr The text to be set if pet does not exist
 	 */
-	public static void petRequestBuilder(String petName, Label petErr) 
+	public static void petRequestBuilder(String petName, Text petErr) 
 	{
 		ApiDataRequest.selectedSearch = Params.PET;
 		if (containsPet(petName)) 
@@ -220,6 +223,12 @@ public class ApiDataRequest
 		}
 		return false;
 	}
+	/**
+	 * This method will search for the displayId of the pet provided
+	 * 
+	 * @param petName The pet to be searched
+	 * @return The id of the pet so that I can get the correct image
+	 */
 	private static String getPetSlotDisplayId(String petName) {
 		String id = null;
 		for (PetSpeciesDisplay petSD : petList)
@@ -234,6 +243,7 @@ public class ApiDataRequest
 	/**
 	 * This method will build the url that will be used when requesting data about a character or pet.
 	 * 
+	 * @param params The parameters to be used in the url 
 	 * @return A String of the url that will be used to request data
 	 */
 	public static String apiUrlBuilder(String params)
@@ -352,9 +362,9 @@ public class ApiDataRequest
 	 * This method will parse a Json string of the requested character data and store it
 	 * into multiple variables that will then be used to populate Text fields in the UI.
 	 * 
-	 * @param chrErr The error label to be set if chr not found
+	 * @param chrErr The text to be set if chr not found
 	 */
-	public static void formatCharacterData(Label chrErr)
+	public static void formatCharacterData(Text chrErr)
 	{
 		Gson gson = new Gson();
 		try {
@@ -411,6 +421,9 @@ public class ApiDataRequest
 				JsonObject selectedTitle = pa.getAsJsonObject();
 				if (selectedTitle.has("selected")) {
 					title = selectedTitle.get("name").getAsString();
+				}
+				else {
+					title = "";
 				}
 			}
 			

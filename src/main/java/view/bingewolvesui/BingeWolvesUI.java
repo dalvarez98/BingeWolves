@@ -82,7 +82,7 @@ public class BingeWolvesUI extends Application
     private final Button mountSearchBtn = new Button("Search");
     private final Button petSearchBtn = new Button("Search"); 
     //Character Search Screen layouts
-    private Label chrDNE = new Label("");
+    private Text chrDNE = new Text("");
     private TextField chrName;
 	private TextField realmName;
 	private ComboBox<String> regionCB;
@@ -130,10 +130,10 @@ public class BingeWolvesUI extends Application
 	Text slot3N = new Text();
 	Text slot3Level = new Text();
 	//Mount Search Screen layouts
-	private Label mountDNE = new Label("");
+	private Text mountDNE = new Text("");
     private TextField mountName;
     //Pet Search Screen layouts
-    private Label petDNE = new Label("");
+    private Text petDNE = new Text("");
     private TextField petName;
     //Mount Data Screen layouts
     Text mountN = new Text();
@@ -235,6 +235,10 @@ public class BingeWolvesUI extends Application
 					if (ApiDataRequest.title.startsWith("%s"))
 					{
 						characterName.setText(chrName.getText() + " ," + ApiDataRequest.title.substring(3));
+					}
+					else if (ApiDataRequest.title.isEmpty()) 
+					{
+						characterName.setText(chrName.getText());
 					}
 					else
 					{
@@ -477,7 +481,7 @@ public class BingeWolvesUI extends Application
 		petCSBtn.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
 		
 		chrDNE.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
-		chrDNE.setTextFill(Color.DARKRED);
+		chrDNE.setFill(Color.DARKRED);
 		
 		Label lblName = new Label("Character Name");
 		lblName.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
@@ -795,7 +799,7 @@ public class BingeWolvesUI extends Application
 		petMSBtn.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
 		
 		mountDNE.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
-		mountDNE.setTextFill(Color.DARKRED);
+		mountDNE.setFill(Color.DARKRED);
 		Label lblMName = new Label("Mount Name:");
 		lblMName.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
 		this.mountName = new TextField();
@@ -954,7 +958,7 @@ public class BingeWolvesUI extends Application
 		mountPSBtn.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
 
 		this.petDNE.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
-		this.petDNE.setTextFill(Color.DARKRED);
+		this.petDNE.setFill(Color.DARKRED);
 		Label lblPName = new Label("Pet Name:");
 		lblPName.setFont(Font.font("SansSerif", FontWeight.BOLD, 12));
 		this.petName = new TextField();

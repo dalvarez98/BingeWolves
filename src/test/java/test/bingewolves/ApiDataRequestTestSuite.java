@@ -4,12 +4,15 @@ import org.hamcrest.collection.IsMapContaining;
 import org.junit.*;
 import static org.junit.Assert.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.junit.runner.JUnitCore;
 
 import controller.bingewolves.ApiDataRequest;
 import controller.bingewolves.Mount;
+import javafx.scene.text.Text;
+import view.bingewolvesui.BingeWolvesUI;
 
 import org.junit.Test;
 
@@ -18,44 +21,54 @@ import org.junit.Test;
  * @version 1.0
  */
 public class ApiDataRequestTestSuite {
-	private ApiDataRequest classUnderTest;
-	
-	@Before
-	public void setUp() throws Exception {
-		classUnderTest = new ApiDataRequest();
+	@After
+	public void cleanList() {
+	    ApiDataRequest.petList.clear();
 	}
 	/**
 	 * Test method for {@link controller.bingewolves.ApiDataRequest#chrRequestBuilder(java.lang.String, java.lang.String, java.lang.String)}.
 	 * 
 	 */
 	@Test
-	public void testChrRequestBuilder() {
+	public void testChrRequestBuilderParams() {
 		String realmName = "Stormrage";
 		String chrName = "Ronnad";
 		String regionCB = "us";
-		String expectedResult = "character/Stormrage/Ronnad?fields=titles%2C%20stats%2C%20mounts%2C%20pets&";
-		String result;
+		String expectedResult = "character/Stormrage/Ronnad?fields=titles%2C%20stats%2C%20mounts%2C%20pets%2C%20petSlots%20&";
 		
-		result = classUnderTest.chrRequestBuilder(realmName, chrName, regionCB);
-		assertEquals(result, expectedResult);
+		ApiDataRequest.chrRequestBuilder(realmName, chrName, regionCB);
+		
+		assertEquals(ApiDataRequest., expectedResult);
 	}
 
 	/**
-	 * Test method for {@link controller.bingewolves.ApiDataRequest#mountRequestBuilder()}.
+	 * Test method for {@link controller.bingewolves.ApiDataRequest#mountRequestBuilder(java.lang.String, javafx.scene.text.Text)}.
 	 * 
 	 */
 	@Test
 	public void testMountRequestBuilder() {
-		String expectedResult = "mount/?";
-		String mountName = "Artic Wolf";
-		String result;
+		String expectedResultN = "Arctic Wolf";
+		String expectedResultId = "1166";
+		String mountName = "Arctic Wolf";
+		Text test = new Text();
+		ApiDataRequest.mountRequestBuilder(mountName, test);
 		
-		//result = classUnderTest.mountRequestBuilder(mountName);
-		//assertEquals(result, expectedResult);
+		//assertEquals(expectedResultN, );
+		assertEquals(expectedResultId, ApiDataRequest.mDisplayId);
 	}
-
 	/**
-	 * Test method for {@link controller.bingewolves.ApiDataRequest#petRequestBuilder(java.lang.String)}.
+	 * Test method for {@link controller.bingewolves.ApiDataRequest#mountRequestBuilder(java.lang.String, javafx.scene.text.Text)}.
+	 * 
+	 */
+	@Test
+	public void testMountNotFoundException() {
+		String mountName = "Arlokl";
+		Text test = new Text();
+		ApiDataRequest.mountRequestBuilder(mountName, test);
+		assertEquals(test.getText(), "That Mount does not exist please check spelling or search for a new mount.");
+	}
+	/**
+	 * Test method for {@link controller.bingewolves.ApiDataRequest#petRequestBuilder(java.lang.String, javafx.scene.text.Text)}.
 	 * 
 	 */
 	@Test
@@ -67,49 +80,59 @@ public class ApiDataRequestTestSuite {
 		result = classUnderTest.petRequestBuilder(petName);
 		assertEquals(result, expectedResult);
 	}
-	
+	/**
+	 * Test method for {@link controller.bingewolves.ApiDataRequest#containsPet(java.lang.String)}.
+	 * 
+	 */
+	@Test
+	public void testContainsPet() {
+		boolean expectedTrue = true;
+		String petName = "Celestial Calf";
+		boolean result;
+		ApiDataRequest.getPetList();
+		result = ApiDataRequest.containsPet(petName);
+		
+		assertEquals(expectedTrue, result);
+	}
 	/**
 	 * Test method for {@link controller.bingewolves.ApiDataRequest#apiUrlBuilder()}.
 	 * 
 	 */
 	@Test
 	public void testApiUrlBuilder() {
-		String expectedURL = "https://us.api.blizzard.com/wow/character/Stormrage/Ronnad?fields=titles%2C%20stats%2C%20mounts%2C%20pets&locale=en_US";
-		String realmName = "Stormrage";
-		String chrName = "Ronnad";
-		String regionCB = "us";
+		String expectedURL = "https://us.api.blizzard.com/wow/character/Stormrage/Ronnad?fields=titles%2C%20stats%2C%20mounts%2C%20pets%2C%20petSlots%20&locale=en_US";
+		String params = "character/Stormrage/Ronnad?fields=titles%2C%20stats%2C%20mounts%2C%20pets%2C%20petSlots%20&";
 		String result;
 		
-		classUnderTest.chrRequestBuilder(realmName, chrName, regionCB);
-		result = classUnderTest.apiUrlBuilder();
+		
+		result = ApiDataRequest.apiUrlBuilder(params);
 		
 		assertEquals(result, expectedURL);
 	}
 	
 	/**
-	 * Test method for {@link controller.bingewolves.ApiDataRequest#getPetMap()}.
+	 * Test method for {@link controller.bingewolves.ApiDataRequest#getPetList()}.
 	 * 
 	 */
 	@Test
-	public void testGetPetMap() {
-		Map <String, String> mapResult;
-		mapResult = classUnderTest.getPetMap();
+	public void testGetPetList() {
+		ApiDataRequest.getPetList();
 		
-		//number 68858 is the species id of the pet and each pet has it's own unique species id
-		assertThat(mapResult, IsMapContaining.hasEntry("Celestial Calf", "68858"));
+		assertEquals(1619, ApiDataRequest.petList.size());
 	}
 	
 	/**
-	 * Test method for {@link controller.bingewolves.ApiDataRequest#getMountMap()}.
-	 * 
+	 * Test method for {@link controller.bingewolves.ApiDataRequest#getMountList()}.
 	 */
 	@Test
-	public void testGetMountMap() {
-		Map <String, Mount> mapResult;
-		//mapResult = classUnderTest.getMountMap();
+	public void testGetMountList() {
+		try {
+			ApiDataRequest.getMountList();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		//number 1166 is the display id of the mount and each mount has a unique display id
-		//assertThat(mapResult, IsMapContaining.hasEntry("Artic Wolf", "1166"));
+		assertEquals(733, ApiDataRequest.mountList.size());
 	}
 
 	/**
