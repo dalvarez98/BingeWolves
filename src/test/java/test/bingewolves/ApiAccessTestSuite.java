@@ -1,6 +1,3 @@
-/**
- * 
- */
 package test.bingewolves;
 
 import org.junit.*;

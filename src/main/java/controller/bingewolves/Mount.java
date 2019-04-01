@@ -9,13 +9,13 @@ package controller.bingewolves;
 public class Mount 
 {
 	private String mountName;
-	private String displayId;
+	private long displayId;
 	private String mountDescription;
 	private String howToObtain;
 	
 	public Mount(){}
 	
-	public Mount(String mountName, String displayId, String mountDescription, String howToObtain) {
+	public Mount(String mountName, long displayId, String mountDescription, String howToObtain) {
 		super();
 		this.mountName = mountName;
 		this.displayId = displayId;
@@ -37,13 +37,13 @@ public class Mount
 	/**
 	 * @return the displayId
 	 */
-	public String getDisplayId() {
+	public long getDisplayId() {
 		return displayId;
 	}
 	/**
 	 * @param displayId the displayId to set
 	 */
-	public void setDisplayId(String displayId) {
+	public void setDisplayId(long displayId) {
 		this.displayId = displayId;
 	}
 	/**

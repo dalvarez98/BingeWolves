@@ -117,7 +117,7 @@ public class ApiDataRequest
 			realm = realm.replaceAll("\\s", "%20");
 		}
 		region = regionCB;
-		//Set selectedSearch = Params.Character so it know which fields to load
+		//Set selectedSearch = Params.Character so it knows which fields to load
 		ApiDataRequest.selectedSearch = Params.CHARACTER;
 		fields();
 		params = "character/" + realm + "/" + name + fields;
@@ -139,8 +139,7 @@ public class ApiDataRequest
 				if (mount.getMountName().equals(mountName))
 				{
 					mName = mount.getMountName();
-					//Removing first char because data came in with apostrophe
-					mDisplayId = mount.getDisplayId().substring(1);
+					mDisplayId = Long.toString(mount.getDisplayId());
 					mountDescription = mount.getMountDescription();
 					mountHowToObtain = mount.getHowToObtain();
 					mountErr.setText("");
@@ -345,7 +344,9 @@ public class ApiDataRequest
 					e.setMountName(ce.getStringCellValue());
 				}
 				if (j == 1) {
-					e.setDisplayId(ce.getStringCellValue());
+					double dId = ce.getNumericCellValue();
+					long id = (long) dId;
+					e.setDisplayId(id);
 				}
 				if (j == 2) {
 					e.setMountDescription(ce.getStringCellValue());
@@ -366,6 +367,7 @@ public class ApiDataRequest
 	 */
 	public static void formatCharacterData(Text chrErr)
 	{
+		title = "";
 		Gson gson = new Gson();
 		try {
 			String data = apiRequest.getRequestedData(requestUrl);
@@ -421,12 +423,12 @@ public class ApiDataRequest
 				JsonObject selectedTitle = pa.getAsJsonObject();
 				if (selectedTitle.has("selected")) {
 					title = selectedTitle.get("name").getAsString();
-				}
-				else {
-					title = "";
+					break;
 				}
 			}
-			
+			if (title.isEmpty()) {
+				title = "";
+			}
 			achievPoints = body.get("achievementPoints").getAsString();
 			JsonObject mCollected = body.get("mounts").getAsJsonObject();
 			mountsCollected = mCollected.get("numCollected").getAsString();
@@ -548,6 +550,14 @@ public class ApiDataRequest
 				e.printStackTrace();
 			}
 	}
+	/**
+	 * This is just for testing purposes
+	 * 
+	 * @return the params
+	 */
+	public static String getParams() {
+		return params;
+	}	
 }
 
 

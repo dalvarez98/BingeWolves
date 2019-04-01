@@ -173,7 +173,7 @@ public class BingeWolvesUI extends Application
 		}
 		mainScreen = new Scene(mainScreenLayout(), 1000, 700);
 		chrSearchScreen = new Scene(chrSearchScreenLayout(), 1000, 700);
-		chrStatScreen = new Scene(chrStatScreenLayout(), 1000, 900);
+		chrStatScreen = new Scene(chrStatScreenLayout());
 		chrCollectionsScreen = new Scene(chrCollectionScreenLayout(), 1000, 700);
 		mountSearchScreen = new Scene(mountSearchScreenLayout(), 1000, 700);
 		mountDataScreen = new Scene(mountDataScreenLayout(), 1000, 700);
@@ -236,13 +236,13 @@ public class BingeWolvesUI extends Application
 					{
 						characterName.setText(chrName.getText() + " ," + ApiDataRequest.title.substring(3));
 					}
-					else if (ApiDataRequest.title.isEmpty()) 
+					else if(ApiDataRequest.title.endsWith("%s"))
 					{
-						characterName.setText(chrName.getText());
+						characterName.setText(ApiDataRequest.title.substring(0, ApiDataRequest.title.length() - 3) + ", " + chrName.getText());
 					}
 					else
 					{
-						characterName.setText(ApiDataRequest.title.substring(0, ApiDataRequest.title.length() - 3) + ", " + chrName.getText());
+						characterName.setText(chrName.getText());
 					}
 					chrName.clear();
 					realmName.clear();
@@ -339,6 +339,7 @@ public class BingeWolvesUI extends Application
 					versatilityImView.setImage(versatilityImage);
 					versatilityStat.setText(ApiDataRequest.versatility + "\nVERSATILITY");
 					
+					primaryStage.sizeToScene();
 					primaryStage.setScene(chrStatScreen);
 				}
 			}
