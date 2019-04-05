@@ -29,9 +29,9 @@ import com.google.gson.JsonParser;
 public class ApiAccess 
 {
 	//Obtained from registering your application at Blizzard Developer Portal
-	private final String CLIENT_KEY = "ba526934026a4c94a4562abc2af9699c";
+	private final String CLIENT_KEY = ""; //Input your own key
 	//Obtained from registering your application at Blizzard Developer Portal
-	private final String CLIENT_SECRET = "MIiCraNwVIlA4aHdd62ZvD5NM9KArLMO";
+	private final String CLIENT_SECRET = ""; //Input your own secret
 	private final String ACCESS_TOKEN_SERVER_URL = "https://us.battle.net/oauth/token";
 	private static String accessToken;
 	private static long tokenExpiration;
