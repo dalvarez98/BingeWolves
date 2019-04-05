@@ -1,6 +1,7 @@
 package view.bingewolvesui;
 
 import java.io.IOException;
+import java.net.URL;
 
 import controller.bingewolves.ApiDataRequest;
 import controller.bingewolves.ApiDataRequest.Params;
@@ -252,7 +253,7 @@ public class BingeWolvesUI extends Application
 					Image chrImage = new Image(chrImagePath, 1000, 600, false, false);
 					chrImView.setImage(chrImage);
 					
-					healthImagePath = "/statIcons/health.png";
+					healthImagePath = "/statIcons/health.PNG";
 					Image healthImage = new Image(healthImagePath, 46, 46, false, false);
 					healthImView.setImage(healthImage);
 					healthStats.setText(ApiDataRequest.health + "\nHEALTH");
@@ -260,37 +261,37 @@ public class BingeWolvesUI extends Application
 					//images for their class
 					if (ApiDataRequest.classNum.equals("1"))
 					{
-						chrResourcesImagePath = "/statIcons/rage.png";
+						chrResourcesImagePath = "/statIcons/rage.PNG";
 						chrResourceStats.setText(ApiDataRequest.chrResources + "\nRAGE");
 					}
 					else if (ApiDataRequest.classNum.equals("3"))
 					{
-						chrResourcesImagePath = "/statIcons/focus.png";
+						chrResourcesImagePath = "/statIcons/focus.PNG";
 						chrResourceStats.setText(ApiDataRequest.chrResources + "\nFOCUS");
 					}
 					else if (ApiDataRequest.classNum.equals("6"))
 					{
-						chrResourcesImagePath = "/statIcons/runicPower.png";
+						chrResourcesImagePath = "/statIcons/runicPower.PNG";
 						chrResourceStats.setText(ApiDataRequest.chrResources + "\nRUNIC POWER");
 					}
 					else if (ApiDataRequest.classNum.equals("4") || ApiDataRequest.classNum.equals("10"))
 					{
-						chrResourcesImagePath = "/statIcons/energy.png";
+						chrResourcesImagePath = "/statIcons/energy.PNG";
 						chrResourceStats.setText(ApiDataRequest.chrResources + "\nENERGY");
 					}
 					else if (ApiDataRequest.classNum.equals("12"))
 					{
-						chrResourcesImagePath = "/statIcons/fury.png";
+						chrResourcesImagePath = "/statIcons/fury.PNG";
 						chrResourceStats.setText(ApiDataRequest.chrResources + "\nFURY");
 					}
 					else if (ApiDataRequest.classNum.equals("7"))
 					{
-						chrResourcesImagePath = "/statIcons/maelstrom";
+						chrResourcesImagePath = "/statIcons/maelstrom.PNG";
 						chrResourceStats.setText(ApiDataRequest.chrResources + "\nMAELSTROM");
 					}
 					else
 					{
-						chrResourcesImagePath = "/statIcons/mana.png";
+						chrResourcesImagePath = "/statIcons/mana.PNG";
 						chrResourceStats.setText(ApiDataRequest.chrResources + "\nMANA");
 					}
 					Image resourceImage = new Image(chrResourcesImagePath, 46, 46, false, false);
@@ -298,43 +299,43 @@ public class BingeWolvesUI extends Application
 					//Checking for the class num so that I know which primray stat image to load
 					if (ApiDataRequest.classNum.equals("1") || ApiDataRequest.classNum.equals("2") || ApiDataRequest.classNum.equals("6"))
 					{
-						primaryStatImagePath = "/statIcons/strength.png";
+						primaryStatImagePath = "/statIcons/strength.PNG";
 						primaryStat.setText(ApiDataRequest.strength + "\nSTRENGTH");
 					}
 					else if (ApiDataRequest.classNum.equals("5") || ApiDataRequest.classNum.equals("8") || ApiDataRequest.classNum.equals("9"))
 					{
-						primaryStatImagePath = "/statIcons/intellect.png";
+						primaryStatImagePath = "/statIcons/intellect.PNG";
 						primaryStat.setText(ApiDataRequest.intellect + "\nINTELLECT");
 					}
 					else
 					{
-						primaryStatImagePath = "/statIcons/agility.png";
+						primaryStatImagePath = "/statIcons/agility.PNG";
 						primaryStat.setText(ApiDataRequest.agility + "\nAGILITY");
 					}
 					Image primaryStatImage = new Image(primaryStatImagePath, 46, 46, false, false);
 					primaryStatImView.setImage(primaryStatImage);
 					
-					staminaImagePath = "/statIcons/stamina.png";
+					staminaImagePath = "/statIcons/stamina.PNG";
 					Image staminaImage = new Image(staminaImagePath, 46, 46, false, false);
 					staminaImView.setImage(staminaImage);
 					staminaStat.setText(ApiDataRequest.stamina + "\nSTAMINA");
 					
-					critImagePath = "/statIcons/criticalStrike.png";
+					critImagePath = "/statIcons/criticalStrike.PNG";
 					Image critImage = new Image(critImagePath, 46, 46, false, false);
 					criticalStrikeImView.setImage(critImage);
 					critStat.setText(ApiDataRequest.criticalStrike + "%" + "\nCRITICAL\nSTRIKE");
 					
-					hasteImagePath = "/statIcons/haste.png";
+					hasteImagePath = "/statIcons/haste.PNG";
 					Image hasteImage = new Image(hasteImagePath, 50, 50, false, false);
 					hasteImView.setImage(hasteImage);
 					hasteStat.setText(ApiDataRequest.haste + "%" + "\nHASTE");
 					
-					masteryImagePath = "/statIcons/mastery.png";
+					masteryImagePath = "/statIcons/mastery.PNG";
 					Image masteryImage = new Image(masteryImagePath, 50, 50, false, false);
 					masteryImView.setImage(masteryImage);
 					masteryStat.setText(ApiDataRequest.mastery + "%" + "\nMASTERY");
 					
-					versatilityImagePath = "/statIcons/versatility.png";
+					versatilityImagePath = "/statIcons/versatility.PNG";
 					Image versatilityImage = new Image(versatilityImagePath, 46, 46, false, false);
 					versatilityImView.setImage(versatilityImage);
 					versatilityStat.setText(ApiDataRequest.versatility + "\nVERSATILITY");
@@ -351,19 +352,19 @@ public class BingeWolvesUI extends Application
 				totalMounts.setText("Total Collected: " + ApiDataRequest.mountsCollected);
 				totalPets.setText("Total Collected: " + ApiDataRequest.petsCollected);
 				
-				slot1ImagePath = "/petImages/" + ApiDataRequest.petSlot1 + ".jpg";
+				slot1ImagePath = "PetImages/" + ApiDataRequest.petSlot1 + ".jpg";
 				Image slot1Image = new Image(slot1ImagePath, 150, 150, false, false);
 				petSlot1ImView.setImage(slot1Image);
 				slot1N.setText(ApiDataRequest.slot1Name);
 				slot1Level.setText("Level: " + ApiDataRequest.slot1L);
 				
-				slot2ImagePath = "/petImages/" + ApiDataRequest.petSlot2 + ".jpg";
+				slot2ImagePath = "PetImages/" + ApiDataRequest.petSlot2 + ".jpg";
 				Image slot2Image = new Image(slot2ImagePath, 150, 150, false, false);
 				petSlot2ImView.setImage(slot2Image);
 				slot2N.setText(ApiDataRequest.slot2Name);
 				slot2Level.setText("Level: " + ApiDataRequest.slot2L);
 				
-				slot3ImagePath = "/petImages/" + ApiDataRequest.petSlot3 + ".jpg";
+				slot3ImagePath = "PetImages/" + ApiDataRequest.petSlot3 + ".jpg";
 				Image slot3Image = new Image(slot3ImagePath, 150, 150, false, false);
 				petSlot3ImView.setImage(slot3Image);
 				slot3N.setText(ApiDataRequest.slot3Name);
@@ -396,9 +397,11 @@ public class BingeWolvesUI extends Application
 					petName.clear();
 					ApiDataRequest.formatPetData(petDescription, petSpecies,petHowToObtain);
 					petN.setText(ApiDataRequest.pet);
-					petImagePath = "/petImages/" + ApiDataRequest.pDisplayId + ".jpg";
+					System.out.println("Hello");
+					petImagePath = "PetImages/" + ApiDataRequest.pDisplayId + ".jpg";
 					Image petImage = new Image(petImagePath, 300, 300, false, false);
 					petImView.setImage(petImage);
+					System.out.println("Hello32");
 					primaryStage.setScene(petDataScreen);
 				}
 			}
