@@ -1,4 +1,4 @@
-# BingeWolves
+# BingeWolves (Currently in the Process of updating all functionality)
 Description:
 
 This project is based on the World of Warcraft Armory. My project is a GUI based project and will allow the user to search for a World of Warcraft character and be provided with the stats and collections of that character. The user can also search for a mount or pet in the World of Warcraft game and be provided with a description of that mount or pet and how to obtain that mount or pet.
